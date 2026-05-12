@@ -132,24 +132,27 @@ function Explorations() {
 
   useEffect(() => {
     if (!window.gsap || !window.ScrollTrigger) return;
+    const isMobile = window.innerWidth <= 768;
     const ctx = gsap.context(() => {
-      ScrollTrigger.create({
-        trigger: rootRef.current,
-        start: 'top top',
-        end: 'bottom bottom',
-        pin: pinRef.current,
-        pinSpacing: false,
-      });
-      gsap.to(leftRef.current, {
-        y: -260,
-        ease: 'none',
-        scrollTrigger: { trigger: rootRef.current, start: 'top top', end: 'bottom top', scrub: 1 },
-      });
-      gsap.to(rightRef.current, {
-        y: -480,
-        ease: 'none',
-        scrollTrigger: { trigger: rootRef.current, start: 'top top', end: 'bottom top', scrub: 1 },
-      });
+      if (!isMobile) {
+        ScrollTrigger.create({
+          trigger: rootRef.current,
+          start: 'top top',
+          end: 'bottom bottom',
+          pin: pinRef.current,
+          pinSpacing: false,
+        });
+        gsap.to(leftRef.current, {
+          y: -260,
+          ease: 'none',
+          scrollTrigger: { trigger: rootRef.current, start: 'top top', end: 'bottom top', scrub: 1 },
+        });
+        gsap.to(rightRef.current, {
+          y: -480,
+          ease: 'none',
+          scrollTrigger: { trigger: rootRef.current, start: 'top top', end: 'bottom top', scrub: 1 },
+        });
+      }
       gsap.utils.toArray('.expl-card').forEach((el, i) => {
         gsap.to(el, {
           rotation: i % 2 === 0 ? -3 : 4,
@@ -447,3 +450,4 @@ function Footer() {
 }
 
 window.TXCHY_S2 = { SetupShowcase, Explorations, Stats, Collab, Footer };
+
