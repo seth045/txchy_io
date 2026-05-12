@@ -137,13 +137,19 @@ function Navbar({ active, onJump }) {
           ))}
         </nav>
         <div className="nav-sep" />
-        <button onClick={() => onJump('collab')} className="nav-cta gradient-border">
-          <span>DM / Collab</span>
+        <a
+          href="https://txchy-shop.fourthwall.com/collections/all"
+          target="_blank"
+          rel="noreferrer"
+          className="nav-cta gradient-border"
+        >
+          <span>Shop</span>
           <Icon name="arrow-ur" size={13}/>
-        </button>
+        </a>
       </div>
     </motion.div>
   );
 }
 
 window.TXCHY_NAV = { LoadingScreen, Navbar };
+
