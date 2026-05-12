@@ -419,4 +419,3 @@ function WallpaperVault() {
 }
 
 window.TXCHY_S1 = { Hero, BentoGallery, WallpaperVault, NeonArt };
-
