@@ -681,10 +681,169 @@
 .footer-bar-c a { letter-spacing: 0.16em; text-transform: uppercase; transition: color .25s; }
 .footer-bar-c a:hover { color: hsl(var(--text)); }
 
+/* ---------------- PRODUCT MODAL ---------------- */
+.product-modal {
+  position: fixed; inset: 0; z-index: 600;
+  background: rgba(0,0,0,0.84);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  display: flex; align-items: center; justify-content: center;
+  padding: 24px;
+}
+.product-modal-inner {
+  display: grid; grid-template-columns: 1fr 1fr;
+  width: min(860px, 96vw);
+  max-height: 92vh;
+  border-radius: 26px; overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.1);
+  background: rgba(9,9,13,0.97);
+}
+@media (max-width: 640px) {
+  .product-modal-inner { grid-template-columns: 1fr; }
+  .product-modal-visual { aspect-ratio: 4/3; max-height: 260px; }
+}
+.product-modal-visual { position: relative; overflow: hidden; }
+.product-modal-visual .neon-art { height: 100%; }
+.product-modal-visual-badges {
+  position: absolute; left: 14px; top: 14px; display: flex; gap: 6px;
+}
+.product-modal-body {
+  padding: 36px 32px 40px;
+  display: flex; flex-direction: column; gap: 14px;
+  overflow-y: auto;
+}
+.product-modal-header {
+  display: flex; justify-content: space-between; align-items: center;
+}
+.product-modal-name {
+  font-family: var(--font-body); font-weight: 300;
+  font-size: clamp(20px, 2.4vw, 30px);
+  line-height: 1.1; letter-spacing: -0.025em;
+  color: hsl(var(--text));
+}
+.product-modal-divider { height: 1px; background: hsl(var(--stroke)); }
+.product-modal-desc {
+  color: hsl(var(--muted)); font-size: 14px; line-height: 1.65; flex: 1;
+}
+.product-modal-price-row {
+  display: flex; align-items: center; gap: 14px; margin-top: 4px;
+}
+.product-modal-price {
+  font-size: 56px; line-height: 1; letter-spacing: -0.02em; color: hsl(var(--text));
+}
+.product-modal-price-meta { display: flex; flex-direction: column; gap: 3px; }
+.product-modal-cta {
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  padding: 15px 24px; border-radius: 999px;
+  font-size: 14px; font-weight: 500;
+  background: hsl(var(--text)); color: hsl(var(--bg));
+  text-decoration: none;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.product-modal-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 32px -10px rgba(255,255,255,0.28);
+}
+.product-modal-trust { text-align: center; letter-spacing: 0.07em; }
+
+/* ======== 768px — tablets / large phones ======== */
+@media (max-width: 768px) {
+  /* Explorations: drop the 300 vh pin & go static 2-col grid */
+  .expl { min-height: auto; padding: 60px 0 40px; }
+  .expl-pin { height: auto; position: relative; }
+  .expl-cols {
+    position: static;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    padding: 24px 0 0;
+    max-width: 100%;
+  }
+  .expl-col { gap: 12px; }
+  .expl-col-l { padding-top: 0; align-items: stretch; }
+  .expl-col-r { padding-top: 0; align-items: stretch; }
+  .expl-card { width: 100%; box-shadow: 0 8px 24px -12px rgba(0,0,0,0.6); }
+}
+
+/* ======== 720px — shared breakpoint ======== */
 @media (max-width: 720px) {
   .section { padding: 80px 0; }
   .footer-marquee { top: 18%; }
   .stats-section .stat-label { font-size: 11px; }
   .collab-cta { flex-direction: column; align-items: flex-start; padding: 26px; }
   .collab-cta-actions { width: 100%; align-items: stretch; }
+
+  /* Footer bar stacks cleanly */
+  .footer-bar {
+    flex-direction: column; align-items: flex-start;
+    padding: 20px 20px 0; margin: 40px 16px 0; gap: 14px;
+  }
+  .footer-bar-c { flex-wrap: wrap; gap: 14px; }
+  .footer-center { padding: 40px 20px 20px; }
+
+  /* Vault filter pills: horizontal scroll instead of wrap-overflow */
+  .vault-filters { flex-direction: column; align-items: flex-start; gap: 10px; }
+  .vault-filter-row {
+    overflow-x: auto; scrollbar-width: none;
+    flex-wrap: nowrap; max-width: calc(100vw - 56px);
+    border-radius: 14px;
+  }
+  .vault-filter-row::-webkit-scrollbar { display: none; }
+
+  /* Product modal: tighter body padding */
+  .product-modal { padding: 12px; }
+  .product-modal-inner { border-radius: 18px; }
+  .product-modal-body { padding: 24px 20px 28px; gap: 12px; }
 }
+
+/* ======== 480px — small phones ======== */
+@media (max-width: 480px) {
+  .container { padding: 0 16px; }
+  .section { padding: 60px 0; }
+  .section-head { margin-bottom: 36px; }
+
+  /* Loader corners: tighter insets */
+  .loader-topleft, .loader-topright { padding: 18px 20px; }
+  .loader-bottomleft { padding: 0 20px 18px; }
+  .loader-bottomright { right: 20px; bottom: 18px; padding: 0; }
+
+  /* Hero: reduce title so "screen-obsessed." doesn't overflow */
+  .hero-content { padding: 0 20px; }
+  .hero-title { font-size: clamp(30px, 9.5vw, 60px); line-height: 1.0; }
+  .hero-eyebrow { flex-wrap: wrap; gap: 4px; justify-content: center; }
+  .hero-desc { font-size: 14px; }
+  .hero-buttons { flex-direction: column; align-items: center; width: 100%; }
+  .hero-buttons .btn { width: 100%; justify-content: center; }
+
+  /* Bento */
+  .bento { gap: 10px; }
+  .bento-card { border-radius: 16px; }
+  .bento-meta { left: 14px; right: 14px; bottom: 14px; }
+  .bento-title { font-size: 18px; }
+
+  /* Vault grid: 2-col already set above, just tighten gap */
+  .vault-grid { gap: 10px; }
+  .vault-info { padding: 10px 12px 14px; }
+
+  /* Stats */
+  .stats-section { padding: 56px 0; }
+  .stats-grid { gap: 16px; }
+
+  /* Collab */
+  .collab-grid { gap: 10px; }
+  .collab-card { min-height: auto; padding: 20px 16px 18px; }
+  .collab-cta { padding: 20px 18px; }
+
+  /* Setup */
+  .setup-card { padding: 20px 16px 18px; }
+
+  /* Product modal */
+  .product-modal-price { font-size: 44px; }
+  .product-modal-name { font-size: 20px; }
+
+  /* Footer */
+  .footer { padding: 90px 0 20px; margin-top: 40px; }
+
+  /* Explorations: single column on very small screens */
+  .expl-cols { grid-template-columns: 1fr; }
+}
+
